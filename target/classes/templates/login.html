@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #B5C99A, #97A97C);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background-color: #E9F5DB;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid #87986A;
+    }
+
+    .login-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .login-container h2 {
+      font-size: 26px;
+      color: #718355;
+      margin-bottom: 20px;
+      font-family: 'Georgia', serif;
+    }
+
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+      width: 100%;
+      padding: 12px 15px;
+      margin: 12px 0;
+      border: 1px solid #87986A;
+      border-radius: 8px;
+      font-size: 16px;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+      background-color: #CFE1B9;
+      color: #333;
+    }
+
+    .login-container input[type="text"]:focus,
+    .login-container input[type="password"]:focus {
+      border-color: #718355;
+      outline: none;
+    }
+
+    .login-container input[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      background-color: #87986A;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .login-container input[type="submit"]:hover {
+      background-color: #718355;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      margin: 10px 0;
+    }
+
+    .register-link {
+      margin-top: 20px;
+    }
+
+    .register-link a {
+      color: #718355;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .register-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-container">
+  <form id="loginForm" action="/login" method="post" onsubmit="saveCredentials()">
+    <h2>Login</h2>
+    <div class="error" th:if="${error}" th:text="${error}"></div>
+    <input type="text" id="username" name="username" placeholder="Username" required />
+    <input type="password" id="password" name="password" placeholder="Password" required />
+    <input type="submit" value="Login" />
+    <div class="register-link">
+      <p>Please sign in here... <a href="/register">Sign In</a></p>
+    </div>
+  </form>
+</div>
+
+<script>
+    function saveCredentials() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Save the username and password to local storage
+      localStorage.setItem('username', username);
+      localStorage.setItem('password', password);
+    }
+</script>
+
+</body>
+</html>
+
