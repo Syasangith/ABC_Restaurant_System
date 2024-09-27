@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome</title>
+  <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #E9F5DB; /* Updated background color */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .welcome-container {
+            background-color: #B5C99A; /* Updated container color */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        .welcome-container h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 60px;
+            margin: 0;
+            color: #718355; /* Updated heading color */
+        }
+
+        .welcome-container h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            margin: 0;
+            color: #97A97C; /* Updated subheading color */
+        }
+
+        .decorative-line {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .decorative-line:before,
+        .decorative-line:after {
+            content: '';
+            display: inline-block;
+            width: 50px;
+            height: 1px;
+            background-color: #87986A; /* Updated line color */
+            vertical-align: middle;
+            margin: 0 10px;
+        }
+
+        .decorative-line img {
+            width: 24px;
+        }
+    </style>
+</head>
+<body>
+<div class="welcome-container">
+  <h2>Welcome <span th:text="${username}"></span>!</h2>
+</div>
+</body>
+</html>
+

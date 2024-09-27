@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservations</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #718355;
+      color: #333;
+    }
+
+    header {
+      background-color: #B5C99A rgba(0, 0, 0, 0.1);
+      color: #718355;
+      padding: 20px 0;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .nav-menu {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      margin: 10px 0;
+    }
+
+    .nav-menu li {
+      margin: 0 10px;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: black;
+      font-size: 1rem;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .nav-menu a:hover {
+      background-color:#B5C99A;
+    }
+
+    .container {
+      width: 85%;
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color:#E9F5DB;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .section {
+      padding: 20px 0;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      color: #2c3e50;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .form-group label {
+      font-size: 1.1rem;
+      color: #34495e;
+      margin-bottom: 5px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      padding: 12px;
+      border: 2px solid #3498db;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #2980b9;
+    }
+
+    .form-group input[type="date"],
+    .form-group input[type="time"],
+    .form-group input[type="number"] {
+      padding-left: 35px;
+    }
+
+    /* Add icons to inputs */
+    .form-group::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      background-size: contain;
+    }
+
+    .form-group #date::before {
+      background-image: url('date-icon.svg'); /* Example icon */
+    }
+
+    .form-group #time::before {
+      background-image: url('time-icon.svg');
+    }
+
+    .form-group #members::before {
+      background-image: url('people-icon.svg');
+    }
+
+    .form-group button {
+      grid-column: 1 / -1;
+      padding: 15px;
+      background-color: #2ecc71;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .form-group button:hover {
+      background-color: #27ae60;
+    }
+
+    /* Table Styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-top: 30px;
+    }
+
+    table th,
+    table td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+      background-color: #718355;
+      color: white;
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    table td {
+      color: #2c3e50;
+    }
+
+    table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    table tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    table td:last-child {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    /* Buttons inside table */
+    .btn-edit, .btn-cancel {
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-edit {
+      background-color: #3498db;
+      color: white;
+    }
+
+    .btn-cancel {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    .btn-edit:hover {
+      background-color: #2980b9;
+    }
+
+    .btn-cancel:hover {
+      background-color: #c0392b;
+    }
+
+    /* Footer styling */
+    footer {
+      background-color: #718355;
+      color: #ecf0f1;
+      text-align: center;
+      padding: 15px 0;
+      margin-top: 50px;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>ABC Restaurant</h1>
+    <ul class="nav-menu">
+      <li><a href="/homepage">Home</a></li>
+      <li><a href="/about">About Us</a></li>
+      <li><a href="/reservations">Reservations</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+      <li><a href="/contact">Contact Us</a></li>
+      <li><a href="/logout">Log Out</a></li>
+    </ul>
+  </div>
+</header>
+
+<div class="container">
+  <div class="section">
+    <h2>Make a Reservation</h2>
+    <form id="reservationForm" action="/reservations/add" method="post">
+      <div class="form-group">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+      </div>
+
+      <div class="form-group">
+        <label for="time">Time:</label>
+        <input type="time" id="time" name="time" required>
+      </div>
+
+      <div class="form-group">
+        <label for="members">Number of Members:</label>
+        <input type="number" id="members" name="members" required min="1">
+      </div>
+
+      <div class="form-group">
+        <label for="query">Special Requests/Queries:</label>
+        <textarea id="query" name="query" rows="4"></textarea>
+      </div>
+
+      <input type="hidden" id="customerName" name="customerName">
+      <div class="form-group">
+        <button type="submit">Submit Reservation</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="section">
+    <h2>Your Reservations</h2>
+    <table id="reservationTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Members</th>
+          <th>Query</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Rows populated via JavaScript -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const username = localStorage.getItem('username');
+    document.getElementById('customerName').value = username;
+
+    fetch('/api/reservations')
+      .then(response => response.json())
+      .then(data => {
+        const tableBody = document.querySelector('#reservationTable tbody');
+        tableBody.innerHTML = '';
+
+        data.forEach(reservation => {
+          if (reservation.customerName === username) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${reservation.id}</td>
+              <td>${reservation.customerName}</td>
+              <td>${reservation.date}</td>
+              <td>${reservation.time}</td>
+              <td>${reservation.members}</td>
+              <td>${reservation.query}</td>
+              <td>${reservation.status}</td>
+              <td>
+                <button class="btn-edit">Edit</button>
+                <button class="btn-cancel">Cancel</button>
+              </td>
+            `;
+            tableBody.appendChild(row);
+          }
+        });
+      })
+      .catch(error => console.error('Error fetching reservations:', error));
+  });
+</script>
+
+</body>
+</html>
+

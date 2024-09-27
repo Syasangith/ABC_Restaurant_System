@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - ABC Restaurant</title>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Color Palette */
+    :root {
+      --light-green: #E9F5DB;
+      --mid-light-green: #CFE1B9;
+      --mid-green: #B5C99A;
+      --dark-green: #97A97C;
+      --darker-green: #87986A;
+      --deep-green: #718355;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, var(--light-green), var(--mid-light-green));
+    }
+
+    header {
+      background-color: var(--deep-green);
+      color: var(--light-green);
+      padding: 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin: 0;
+      letter-spacing: 2px;
+    }
+
+    .container {
+      width: 85%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 0;
+    }
+
+    .nav-menu {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      margin: 15px 0 0 0;
+    }
+
+    .nav-menu li {
+      margin: 0 15px;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: var(--light-green);
+      font-weight: 500;
+      font-size: 1.2rem;
+      padding: 10px 15px;
+      border-radius: 30px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .nav-menu a:hover {
+      background-color: var(--mid-green);
+      color: var(--dark-green);
+    }
+
+    h2 {
+      color: var(--deep-green);
+      font-size: 2rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .search-bar {
+      margin-bottom: 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-bar .form-control {
+      border-radius: 30px;
+      border: 2px solid var(--mid-green);
+      padding: 10px 20px;
+      max-width: 500px;
+      transition: border-color 0.3s ease;
+    }
+
+    .search-bar .form-control:focus {
+      border-color: var(--deep-green);
+    }
+
+    .btn-primary {
+      background-color: var(--deep-green);
+      border-color: var(--deep-green);
+      border-radius: 30px;
+      padding: 10px 20px;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--mid-green);
+      border-color: var(--mid-green);
+    }
+
+    .product-card {
+      background-color: var(--light-green);
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-bottom: 5px solid var(--mid-green);
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-info h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      color: var(--deep-green);
+      font-weight: 600;
+    }
+
+    .product-info p {
+      margin: 0 0 10px;
+      color: var(--darker-green);
+    }
+
+    .product-info .price {
+      font-weight: bold;
+      color: var(--deep-green);
+    }
+
+    footer {
+      background-color: var(--deep-green);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      bottom: 0;
+      width: 100%;
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>ABC Restaurant</h1>
+    <ul class="nav-menu">
+      <li><a href="/homepage">Home</a></li>
+      <li><a href="/about">About Us</a></li>
+      <li><a href="/reservations">Reservations</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+      <li><a href="/contact">Contact Us</a></li>
+      <li><a href="/logout">Log Out</a></li>
+    </ul>
+  </div>
+</header>
+
+<div class="container mt-4">
+  <h2>Gallery</h2>
+
+  <!-- Search Bar -->
+  <form class="search-bar" th:action="@{/gallery/search}" method="get">
+    <div class="input-group">
+      <input type="text" class="form-control" name="query" placeholder="Search products by name..." aria-label="Search products by name">
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="submit">Search</button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Product Gallery -->
+  <div class="row">
+    <div class="col-sm-6 col-md-4 mb-4" th:each="product : ${products}">
+      <div class="product-card">
+        <img th:src="@{/files/product/{id}(id=${product.id})}" alt="Product Image"/>
+        <div class="product-info">
+          <h3 th:text="${product.name}">Product Name</h3>
+          <p th:text="${product.description}">Product Description</p>
+          <p class="price" th:text="${product.price}">Product Price</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Include Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+

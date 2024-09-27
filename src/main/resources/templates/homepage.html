@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - ABC Restaurant</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #E9F5DB;
+        }
+        header {
+            background-color: #87986A;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000; /* Ensure header stays on top */
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .nav-menu li {
+            margin: 0 15px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 10px 15px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #CFE1B9;
+        }
+
+        .slider {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+            overflow: hidden;
+            margin-top: 15px;
+            border-radius: 8px;
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slides img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .services, .offers {
+            background-color: #CFE1B9;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .services h2, .offers h2 {
+            font-size: 2rem;
+            color: #718355;
+            margin-bottom: 20px;
+            text-align: center;
+            font-family: 'Georgia', serif;
+        }
+
+        .services p, .offers p {
+            font-size: 1.1rem;
+            color: #4f5d50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .services ul, .offers ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .services li, .offers li {
+            background-color: #87986A;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex: 1 1 45%;
+            max-width: 45%;
+        }
+
+        .services li:hover, .offers li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .highlight {
+            background-color: #87986A;
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .highlight:hover {
+            background-color: #718355;
+            cursor: pointer;
+        }
+        .prev {
+            left: 0;
+        }
+        .next {
+            right: 0;
+        }
+
+        footer {
+            background-color: #718355;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            width: 100%;
+            border-top: 3px solid #97A97C;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1>ABC Restaurant</h1>
+        <ul class="nav-menu">
+            <li><a href="/homepage">Home</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/reservations">Reservations</a></li>
+            <li><a href="/gallery">Gallery</a></li>
+            <li><a href="/contact">Contact Us</a></li>
+            <li><a href="/logout">Log Out</a></li>
+        </ul>
+    </div>
+</header>
+
+<div class="container">
+    <!-- Image Slider Section -->
+    <div class="slider">
+        <div class="slides">
+            <img src="https://tableagent.s3.amazonaws.com/media/originals/17669_1fd9929d9afa4f758b19572987e26ddc.png">
+            <img src="https://i.ytimg.com/vi/GbRjDxkDIyA/maxresdefault.jpg">
+            <img src="https://www.gannett-cdn.com/-mm-/5337f63c2c73f4a65aba086db49a73fb825cc7b9/c=0-84-3600-2118/local/-/media/2015/10/21/Phoenix/Phoenix/635810322319428045-catering-spotlight-10.jpg?width=3200&height=1808&fit=crop&format=pjpg&auto=webp">
+            <img src="https://res.cloudinary.com/purnesh/image/upload/w_1000,f_auto,q_auto:eco,c_limit/81631005321467.jpg">
+        </div>
+        <button class="nav-button prev" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="nav-button next" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+
+    <!-- Overview Section -->
+    <div class="section">
+    <h2>Experience the Finest Dining at ABC Restaurant</h2>
+    <p>ABC Restaurant is your go-to destination for exquisite dining experiences across Sri Lanka. Our restaurant combines the perfect blend of elegant ambiance, exceptional service, and a wide range of flavorful dishes. From authentic local favorites to a variety of international cuisines, we pride ourselves on delivering an unforgettable culinary journey. Whether you're here for a romantic dinner, a family celebration, or a business gathering, ABC Restaurant promises a warm, welcoming atmosphere and the finest quality food to satisfy every palate.</p>
+    </div>
+
+    <!-- Highlights of Services and Facilities Section -->
+    <div class="section services">
+        <h2>Services and Facilities</h2>
+        <p>At ABC Restaurant, we ensure that every guest enjoys a unique and memorable experience through our premium services and facilities:</p>
+        <ul>
+            <li class="highlight">Outdoor Dining with Scenic Views</li>
+            <li class="highlight">Exclusive Chef’s Table Experience</li>
+            <li class="highlight">Customizable Catering for Events</li>
+            <li class="highlight">Kids' Play Area and Family-Friendly Spaces</li>
+            <li class="highlight">Valet Parking and EV Charging Stations</li>
+        </ul>
+    </div>
+
+    <!-- Offers and Promotions Section -->
+    <div class="section offers">
+        <h2>Offers and Promotions</h2>
+        <p>Don’t miss our exciting offers and promotions designed to enhance your dining experience:</p>
+        <ul>
+            <li class="highlight">Free Dessert with Any Main Course on Weekdays</li>
+            <li class="highlight">Exclusive 3-Course Meal for Two at a Special Price</li>
+            <li class="highlight">Complimentary Drink with Group Reservations</li>
+            <li class="highlight">Loyalty Program: Earn Points for Every Dine-in or Takeout</li>
+        </ul>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 ABC Restaurant. All rights reserved.</p>
+</footer>
+
+<script>
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        let slides = document.querySelector(".slides");
+        let slideImages = slides.querySelectorAll("img");
+        for (let i = 0; i < slideImages.length; i++) {
+            slideImages[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slideImages.length) {slideIndex = 1}
+        slideImages[slideIndex-1].style.display = "block";
+        setTimeout(showSlides, 3000);
+    }
+
+    function moveSlide(n) {
+        slideIndex += n;
+        let slides = document.querySelector(".slides");
+        let slideImages = slides.querySelectorAll("img");
+        if (slideIndex > slideImages.length) {slideIndex = 1}
+        if (slideIndex < 1) {slideIndex = slideImages.length}
+        for (let i = 0; i < slideImages.length; i++) {
+            slideImages[i].style.display = "none";
+        }
+        slideImages[slideIndex-1].style.display = "block";
+    }
+</script>
+
+</body>
+</html>
+
+
